@@ -31,7 +31,7 @@ public class Launch {
     public static LaunchClassLoader classLoader;
 
     private Launch() {
-        final URLClassLoader ucl = (URLClassLoader) getClass().getClassLoader();
+        final URLClassLoader ucl = new DelegateClassLoader(getClass().getClassLoader());
         classLoader = new LaunchClassLoader(ucl.getURLs());
         blackboard = new HashMap<String,Object>();
         Thread.currentThread().setContextClassLoader(classLoader);
